@@ -74,7 +74,7 @@
     <Content Include="App_Backend\system\.htaccess" />
     <Content Include="App_Backend\system\fonts\texb.ttf" />
     <Content Include="App_View\.htaccess" />
-    <None Include="App_Frontend\Editor\tsconfig.json" />
+    <None Include="App_Editor\tsconfig.json" />
     <Content Include="App_Backend\application\cache\index.html" />
     <Content Include="App_Backend\application\config\autoload.php" />
     <Content Include="App_Backend\application\config\config.php" />
@@ -341,7 +341,7 @@
     <Content Include="App_View\Welcome\foot.php" />
     <Content Include="App_View\Welcome\head.php" />
     <Content Include="App_View\Welcome\registration.php" />
-    <Content Include="App_Frontend\VGL\tsconfig.json_" />
+    <Content Include="App_Editor\Lib_VGL\tsconfig.json_" />
     <Content Include="public_html\.htaccess" />
     <Content Include="public_html\data\bricks.json" />
     <Content Include="public_html\fonts\fontawesome-webfont.eot" />
@@ -353,6 +353,7 @@
     <Content Include="public_html\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="public_html\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="public_html\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -361,13 +362,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Frontend\VGL\Context.js" />
-    <Content Include="App_Frontend\VGL\Entities\Brick.js" />
-    <Content Include="App_Frontend\VGL\Entities\Entity.js" />
-    <Content Include="App_Frontend\VGL\Entities\Grid.js" />
-    <Content Include="App_Frontend\VGL\Handlers\InputHandler.js" />
-    <Content Include="App_Frontend\VGL\Loaders\CubeMeshLoader.js" />
-    <Content Include="App_Frontend\VGL\Loaders\File.js" />
     <Content Include="public_html\css\32px %281%29.png" />
     <Content Include="public_html\css\32px.png" />
     <Content Include="public_html\css\40px %281%29.png" />
@@ -378,7 +372,6 @@
     <Content Include="public_html\css\Editor\Misc.css" />
     <Content Include="public_html\css\font-awesome.min.css" />
     <Content Include="public_html\css\jstree.custom.css" />
-    <Content Include="public_html\css\jstree.min %281%29.css" />
     <Content Include="public_html\css\jstree.min.css" />
     <Content Include="public_html\css\perfect-scrollbar.min.css" />
     <Content Include="public_html\css\projectmanager.css" />
@@ -411,24 +404,24 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="App_Frontend\Editor\app.ts" />
-    <TypeScriptCompile Include="App_Frontend\Editor\Editor.ts" />
-    <TypeScriptCompile Include="App_Frontend\Editor\Interface\Components\Bootstrap.ts" />
-    <TypeScriptCompile Include="App_Frontend\Editor\Interface\Components\SideBar.ts" />
-    <TypeScriptCompile Include="App_Frontend\Editor\Interface\Widgets\DEL_FilesWidget.ts" />
-    <TypeScriptCompile Include="App_Frontend\Editor\Interface\Widgets\FileTreeWidget.ts" />
-    <TypeScriptCompile Include="App_Frontend\Editor\Interface\Widgets\SimpleBarWidget.ts" />
-    <TypeScriptCompile Include="App_Frontend\jquery.d.ts" />
-    <TypeScriptCompile Include="App_Frontend\jquery.form.d.ts" />
-    <TypeScriptCompile Include="App_Frontend\jquery.jstree.d.ts" />
-    <TypeScriptCompile Include="App_Frontend\three.d.ts" />
-    <TypeScriptCompile Include="App_Frontend\VGL\Context.ts" />
-    <TypeScriptCompile Include="App_Frontend\VGL\Entities\Brick.ts" />
-    <TypeScriptCompile Include="App_Frontend\VGL\Entities\Entity.ts" />
-    <TypeScriptCompile Include="App_Frontend\VGL\Entities\Grid.ts" />
-    <TypeScriptCompile Include="App_Frontend\VGL\Handlers\InputHandler.ts" />
-    <TypeScriptCompile Include="App_Frontend\VGL\Loaders\CubeMeshLoader.ts" />
-    <TypeScriptCompile Include="App_Frontend\VGL\Loaders\File.ts" />
+    <TypeScriptCompile Include="App_Editor\app.ts" />
+    <TypeScriptCompile Include="App_Editor\VEditor.ts" />
+    <TypeScriptCompile Include="App_Editor\Interface\Components\DEL_Bootstrap.ts" />
+    <TypeScriptCompile Include="App_Editor\Interface\Components\SideBar.ts" />
+    <TypeScriptCompile Include="App_Editor\Interface\Widgets\DEL_FilesWidget.ts" />
+    <TypeScriptCompile Include="App_Editor\Interface\Widgets\FileTreeWidget.ts" />
+    <TypeScriptCompile Include="App_Editor\Interface\Widgets\SimpleBarWidget.ts" />
+    <TypeScriptCompile Include="App_Editor\Lib_Others\jquery.d.ts" />
+    <TypeScriptCompile Include="App_Editor\Lib_Others\jquery.form.d.ts" />
+    <TypeScriptCompile Include="App_Editor\Lib_Others\jquery.jstree.d.ts" />
+    <TypeScriptCompile Include="App_Editor\Lib_Others\three.d.ts" />
+    <TypeScriptCompile Include="App_Editor\Lib_VGL\Context.ts" />
+    <TypeScriptCompile Include="App_Editor\Lib_VGL\Entities\Brick.ts" />
+    <TypeScriptCompile Include="App_Editor\Lib_VGL\Entities\Entity.ts" />
+    <TypeScriptCompile Include="App_Editor\Lib_VGL\Entities\Grid.ts" />
+    <TypeScriptCompile Include="App_Editor\Lib_VGL\Handlers\InputHandler.ts" />
+    <TypeScriptCompile Include="App_Editor\Lib_VGL\Loaders\CubeMeshLoader.ts" />
+    <TypeScriptCompile Include="App_Editor\Lib_VGL\Loaders\File.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

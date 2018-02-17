@@ -7,7 +7,7 @@
       "dom"
     ],
     "sourceMap": true,
-    "outFile": "../../public_html/js/Editor.js"
+    "outFile": "../public_html/js/Editor.js"
   },
   "compileOnSave": true,
   "exclude": [

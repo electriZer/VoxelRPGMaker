@@ -34,7 +34,7 @@ class BrickTextures extends CI_Model
         $Data = ["Name"=>$Name,"Size"=>$Size,"Type",$Type,"UID"=>$UID];
         $Data["hash"] = md5($BLOB);
         $Data["IMG"] = $BLOB;
-        $this->db->insert("BrickTextures",$Data);
+        $this->db->insert("bricktextures",$Data);
         
         if($this->db->affected_rows()<1){
             // Error
@@ -52,7 +52,7 @@ class BrickTextures extends CI_Model
      *  (The Field "IMG" contains the BLOB of the File)
      */
     public function DownloadTexture($BTID){
-        $res = $this->db->get_where("BrickTextures",["BTID"=>$BTID],1);
+        $res = $this->db->get_where("bricktextures",["BTID"=>$BTID],1);
         if($res->num_rows()>0)return $res->first_row();
         
         return false;

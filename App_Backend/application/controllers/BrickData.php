@@ -17,7 +17,7 @@ class BrickData extends CI_Controller {
 		$this->load->model("BrickPacks");
 	}
 	
-	public function BrickPackage($BPID = 0){
+	public function BrickPack($BPID = 0){
 	    // Trivial Case : User is not signed in
 	    if(!$this->authtool->isSignedIn())
 	    { 
@@ -63,18 +63,16 @@ class BrickData extends CI_Controller {
 			
 			$tmp_NameCounter = 2;
 			RetryName: 
-			if( isset($BrickPack[$BrickName] )){
+			if( isset($BrickPack[$BrickName] && $tmp_NameCounter<= 99 )){
 				$BrickName = $Brick["Name"]."_".$tmp_NameCounter;
 				$tmp_NameCounter++;
 				goto RetryName;
 			}
-			
+			// Set Brick Pack
 			$BrickPack[$BrickName] = [
-					"TextureImages" => $Brick["Textures"],
-					"TextureMapping" => $Brick["Mapping"]
-				];
-				
-			echo json_encode($BrickPack);
+				"TextureImages" => $Brick["Textures"],
+				"TextureMapping" => $Brick["Mapping"]
+			];
 		}
 		
 		// Output resulting JSON Object

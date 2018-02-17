@@ -23,9 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-//$config['base_url'] = 'http://voxelrpgmaker/';
-//$config['base_url'] = 'https://ciwani-mobile-electrizer1-1.c9users.io/';
-//$config['base_url'] = 'http://[2a02:908:1b3:15e0::63]/';
+
 $config['base_url'] = 'https://voxelrpgmaker.000webhostapp.com';
 /*
 |--------------------------------------------------------------------------

@@ -1,8 +1,8 @@
 /**
  * (C) Copyright 2016 by Jiyan Akgül.
  */
-/// <reference path="../three.d.ts" />
-/// <reference path="../jquery.d.ts" />
+/// <reference path="../Lib_Others/three.d.ts" />
+/// <reference path="../Lib_Others/jquery.d.ts" />
 /// <reference path="Entities/Entity.ts"/>
 /// <reference path="Entities/Brick.ts"/>
 /// <reference path="Entities/Grid.ts"/>
@@ -15,7 +15,7 @@ namespace VGL {
         BrickPack : string;
         Width: number;
         Height: number;
-        Parent: JQuery;    // DOM Element for Canvas
+        Parent: HTMLElement;    // DOM Element for Canvas
     }
     export class Context extends Entity{
         public CurrentCamera: THREE.Camera;
@@ -26,8 +26,9 @@ namespace VGL {
         public InputHandler:VGL.Handlers.InputHandler;
         public Options:ContextConstructorParam;
         // Data Url's
-        public static Data = {
-            Bricks : '/data/Bricks/'
+        public static DataURL = {
+            BricksPath: '/bricks/data/',
+            ImagePath: "/bricks/images/"
         }
         
         private BrickPack = "0";
@@ -55,7 +56,7 @@ namespace VGL {
             }*/
             
             // Add Canvas DOM Element to Parent Container
-            Options.Parent.append(this.Renderer.domElement);
+            Options.Parent.appendChild(this.Renderer.domElement);
             
             // Store Settings
             this.OnLoaded = Options.OnLoaded || null; // Register OnLoaded Event
@@ -64,7 +65,7 @@ namespace VGL {
             /// Init Queue : Here will be all Init Components be started
             /// When all Queue Elements finish the OnLoaded Event is fired
             // Init BrickPackage 
-            VGL.Loaders.json.GET( Context.Data.Bricks +this.BrickPack,this.Init.BrickLoader);
+            VGL.Loaders.json.GET( Context.DataURL.BricksPath +this.BrickPack ,this.Init.BrickLoader);
 
             // Load and Init Editor Camera
             this.CurrentCamera = new THREE.PerspectiveCamera( 70, Options.Width / Options.Height, 1, 1000 );
@@ -96,8 +97,8 @@ namespace VGL {
         public Init = {
             Counter:0,
             FinishCount:1,
-            BrickLoader: (Data)=>{
-                this.BrickLoader = new VGL.Loaders.CubeMeshLoader(Data);
+            BrickLoader: (Data) => {
+                this.BrickLoader = new VGL.Loaders.CubeMeshLoader(Data, Context.DataURL);
                 this.InitPartFinished();
             },
         }
@@ -128,7 +129,7 @@ function  isSet(variable){
     return isDefined(variable) && !isNull(variable);
 }
 
-function  isSetTrue(variable){
+function  isSetAndTrue(variable){
     return (isDefined(variable) && !isNull(variable))?(variable==true):false;
 }
 

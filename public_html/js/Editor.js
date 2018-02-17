@@ -195,7 +195,7 @@ var VGL;
              * @constructor
              */
             set Position(val) {
-                this.Mesh.position = val.clone();
+                this.Mesh.position.copy(val);
             }
             /**
              * Checks if this Brick is the searched Mesh
@@ -416,11 +416,13 @@ var VGL;
     var Loaders;
     (function (Loaders) {
         class CubeMeshLoader {
-            constructor(LoaderSetting) {
+            constructor(LoaderSetting, DataURL) {
+                this.ImagePath = "";
                 this.TextureLoader = new THREE.CubeTextureLoader();
                 this.ImageLoader = new THREE.TextureLoader();
-                this.TextureLoader.setPath(CubeMeshLoader.ImagePath);
-                this.ImageLoader.setPath(CubeMeshLoader.ImagePath);
+                this.ImagePath = DataURL.ImagePath;
+                this.TextureLoader.setPath(this.ImagePath);
+                this.ImageLoader.setPath(this.ImagePath);
                 this.Bricks = LoaderSetting;
                 // The Error Brick for fallback is just plain red
                 this.ErrorBrick = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 2), new THREE.MeshBasicMaterial({ color: 0xFF0000 }));
@@ -488,7 +490,7 @@ var VGL;
                     if (!this.TextureCache.hasOwnProperty(TextureFiles[i])) {
                         this.TextureCache[TextureFiles[i]] = new THREE.MeshLambertMaterial({ color: 0xFF0000 });
                         // Load Texture into Cache
-                        this.ImageLoader.load(CubeMeshLoader.ImagePath + TextureFiles[i], ((_cache_class, _cache_name) => {
+                        this.ImageLoader.load(this.ImagePath + TextureFiles[i], ((_cache_class, _cache_name) => {
                             return (texture) => {
                                 texture.mapping = THREE.CubeReflectionMapping;
                                 _cache_class.TextureCache[_cache_name].setValues({ color: 0xFF0000, map: texture }); // = texture;
@@ -501,7 +503,6 @@ var VGL;
                 return ReturnBuffer;
             }
         }
-        CubeMeshLoader.ImagePath = "data/Texture/";
         Loaders.CubeMeshLoader = CubeMeshLoader;
     })(Loaders = VGL.Loaders || (VGL.Loaders = {}));
 })(VGL || (VGL = {}));
@@ -669,8 +670,8 @@ var VGL;
 /**
  * (C) Copyright 2016 by Jiyan Akgül.
  */
-/// <reference path="../three.d.ts" />
-/// <reference path="../jquery.d.ts" />
+/// <reference path="../Lib_Others/three.d.ts" />
+/// <reference path="../Lib_Others/jquery.d.ts" />
 /// <reference path="Entities/Entity.ts"/>
 /// <reference path="Entities/Brick.ts"/>
 /// <reference path="Entities/Grid.ts"/>
@@ -687,7 +688,7 @@ var VGL;
                 Counter: 0,
                 FinishCount: 1,
                 BrickLoader: (Data) => {
-                    this.BrickLoader = new VGL.Loaders.CubeMeshLoader(Data);
+                    this.BrickLoader = new VGL.Loaders.CubeMeshLoader(Data, Context.DataURL);
                     this.InitPartFinished();
                 },
             };
@@ -717,14 +718,14 @@ var VGL;
                  Options.Parent.removeChild(Options.Parent.firstChild);
              }*/
             // Add Canvas DOM Element to Parent Container
-            Options.Parent.append(this.Renderer.domElement);
+            Options.Parent.appendChild(this.Renderer.domElement);
             // Store Settings
             this.OnLoaded = Options.OnLoaded || null; // Register OnLoaded Event
             this.BrickPack = Options.BrickPack;
             /// Init Queue : Here will be all Init Components be started
             /// When all Queue Elements finish the OnLoaded Event is fired
             // Init BrickPackage 
-            VGL.Loaders.json.GET(Context.Data.Bricks + this.BrickPack, this.Init.BrickLoader);
+            VGL.Loaders.json.GET(Context.DataURL.BricksPath + this.BrickPack, this.Init.BrickLoader);
             // Load and Init Editor Camera
             this.CurrentCamera = new THREE.PerspectiveCamera(70, Options.Width / Options.Height, 1, 1000);
             this.CurrentCamera.position.z = 20;
@@ -760,15 +761,16 @@ var VGL;
         }
     }
     // Data Url's
-    Context.Data = {
-        Bricks: '/data/Bricks/'
+    Context.DataURL = {
+        BricksPath: '/bricks/data/',
+        ImagePath: "/bricks/images/"
     };
     VGL.Context = Context;
 })(VGL || (VGL = {}));
 function isSet(variable) {
     return isDefined(variable) && !isNull(variable);
 }
-function isSetTrue(variable) {
+function isSetAndTrue(variable) {
     return (isDefined(variable) && !isNull(variable)) ? (variable == true) : false;
 }
 function isDefined(variable) {
@@ -780,8 +782,7 @@ function isNull(variable) {
 /**
  * (C) Copyright 2016 by Jiyan Akgül.
  */
-/// <reference path="../VGL/Context.ts"/>
-/// <reference path="../jquery.d.ts"/>
+/// <reference path="Lib_VGL/Context.ts"/>
 class VEditor {
     /**
      * Initializes a new VEditor instance with a Rendering Context into
@@ -791,11 +792,11 @@ class VEditor {
      */
     constructor(ContextContainerElement) {
         this.Ray = new THREE.Raycaster();
+        this.CurrentFieldPosition = null;
         this.SelectedEntity = null;
         this.SelectedEntityMesh = null;
         this.SelectionDirty = false;
         this.PlaneSelected = null;
-        this.CurrentFieldPosition = null;
         // ==== INIT CONTEXT AND APPEND IT TO THIS INSTANCE =================
         // Specify a valid DOM Element as Canvas Container
         var ContextContainer = ContextContainerElement || null;
@@ -816,42 +817,65 @@ class VEditor {
         // to the new VEditor Instance
         new VGL.Context(ContextOptions);
     }
-    // Create Ray from MouseClick and find out which Element was clicked
+    /**
+    * Create Ray from MouseClick and find out which Element was clicked
+    *
+    * @param event Mouse Event Information
+    */
     SelectEntity(event) {
+        // This Function only works with CTRL Key Pressed
         if (!event.ctrlKey)
             return;
+        // Reset Tmp Variables
         this.SelectedEntity = null;
         this.SelectionDirty = true;
+        // Get Canvas Element and Information
         var canvas = this.Context.getCanvas();
         var canvasWidth = canvas.width;
         var canvasHeight = canvas.height;
+        // Calculate Mouse Position in Canvas
         var mouse = {
             x: ((event.clientX - canvas.offsetLeft) / canvasWidth) * 2 - 1,
             y: -((event.clientY - canvas.offsetTop) / canvasHeight) * 2 + 1
         };
+        // Raycast from mouse position
         this.Ray.setFromCamera(mouse, this.Context.CurrentCamera);
+        // Test which Scene Objects the ray intersects 
         var intersects = this.Ray.intersectObjects(this.Context.getScene().children);
-        //console.dir(intersects);
+        // If ray intersects scene objects
         if (intersects.length > 0) {
+            // Iterate through list of intersected Objects 
             for (var i = 0; i < intersects.length; i++) {
-                if (intersects[i].object instanceof THREE.Mesh) {
-                    if (isSetTrue(intersects[i].object.userData.isBrick)) {
-                        var SelectedEntity = this.Context.getEntityByMesh((intersects[i].object));
-                        if (SelectedEntity != false) {
-                            this.SelectedEntity = (SelectedEntity);
-                        }
+                // Continue loop if object is not a Mesh
+                if (!(intersects[i].object instanceof THREE.Mesh))
+                    continue;
+                // Check if intersected object is a brick mesh
+                if (isSetAndTrue(intersects[i].object.userData.isBrick)) {
+                    // Get Entity Reference of intersected object
+                    var EntityOfObject = this.Context.getEntityByMesh((intersects[i].object));
+                    // check if Entity was found by getEntityByMesh
+                    if (EntityOfObject != false) {
+                        // Store Entity of intersected objet in tmp class variable 
+                        this.SelectedEntity = (EntityOfObject);
                     }
                 }
             }
         }
-        //console.log(this.SelectedEntity);
     }
+    /**
+     *
+     * @param event
+     */
     PlaceEntity(event) {
         if (event.ctrlKey || this.SelectedEntity == null || this.SelectedEntityMesh == null)
             return;
         var NewBrick = new VGL.Entities.Brick(this.SelectedEntityMesh.clone(), this.Context);
         this.Context.addChild(NewBrick);
     }
+    /**
+     *
+     * @param event
+     */
     HighLightGrid(event) {
         if (event.ctrlKey)
             return;
@@ -868,7 +892,7 @@ class VEditor {
         if (intersects.length > 0) {
             for (var i = 0; i < intersects.length; i++) {
                 if (intersects[i].object instanceof THREE.Mesh) {
-                    if (isSetTrue(intersects[i].object.userData.isGridElement)) {
+                    if (isSetAndTrue(intersects[i].object.userData.isGridElement)) {
                         var Field = (intersects[i].object.userData);
                         this.Grid.HighlightField(Field);
                         this.CurrentFieldPosition = Field.Position;
@@ -922,7 +946,7 @@ class VEditor {
         this.Context.InputHandler.OnMouseMovedEvents["DragObject"] = this.MoveSelected.bind(this);
         console.log("Ready");
         var Test = Context.Create.Brick("grass", [0, 0, 0]);
-        this.Grid = new VGL.Entities.Grid(Context);
+        this.Grid = new VGL.Entities.Grid(Context, 10, 10, 10);
         Context.Draw();
         //Test.getMesh().rotateX(45);
         //Test.getMesh().rotateZ(-45);
@@ -933,9 +957,6 @@ class VEditor {
     }
 }
 ;
-/// <reference path="../../../jquery.d.ts"/>
-/// <reference path="../../../jquery.jstree.d.ts"/>
-/// <reference path="../../Editor.ts" />
 class FileTreeWidgetHandlers {
 }
 /**
@@ -955,9 +976,8 @@ FileTreeWidgetHandlers["1"] = function (id) {
 */
 FileTreeWidgetHandlers["2"] = function (id) {
     //TODO : Tab Manager to create new tab
-    var tab = $("x-tab-view");
+    var tab = $("x-tab-view").get(0);
     var editor = new VEditor(tab);
-    //editor.OnReady();
     console.log("Open Map File " + id);
 };
 class FileTreeWidget extends HTMLElement {
@@ -1127,8 +1147,9 @@ var XFileTree = document.registerElement('x-file-tree', FileTreeWidget);
 /**
  * (C) Copyright 2016 by Jiyan Akgül.
  */
-/// <reference path="../jquery.d.ts"/>
-/// <reference path="Editor.ts"/>
+/// <reference path="Lib_Others/jquery.jstree.d.ts"/>
+/// <reference path="Lib_Others/jquery.d.ts"/>
+/// <reference path="VEditor.ts"/>
 /// <reference path="Interface/Widgets/FileTreeWidget.ts"/>
 class Application {
     // Place this as onload Event

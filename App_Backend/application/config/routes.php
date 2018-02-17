@@ -57,7 +57,7 @@ $route['Registration'] = "Auth/RegistrationForm";
 
 // Data Routes
 $route['data/Texture/(:any)'] = "BrickData/BrickTexture/$1";
-$route['data/Bricks/(:any)'] = "BrickData/BrickPackage/$1";
+$route['data/Bricks/(:any)'] = "BrickData/BrickPack/$1";
 
 $route['data/Files/(:num)/list'] = "ProjectData/ListFiles/$1";
 $route['data/Files/(:num)/update']['post'] = "ProjectData/Update/$1";

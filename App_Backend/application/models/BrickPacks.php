@@ -20,7 +20,7 @@ class BrickPacks extends CI_Model
     
     public function getBrickPack($BPID){
         // Get Brick Pack Data from DB
-        $BrickPack = $this->db->get_where("BrickPacks",["BPID"=>$BPID]);
+        $BrickPack = $this->db->get_where("brickpacks",["BPID"=>$BPID]);
         if($BrickPack->num_rows()<=0)   return false;
         else return $BrickPack->result();
     }
@@ -28,7 +28,7 @@ class BrickPacks extends CI_Model
     public function getBricks($Bricks){
         // Get All Rows from "Bricks" Table which match the IDs in the List $Bricks
 		$this->db->where_in("BRICK_ID",$Bricks);
-		$BrickList = $this->db->get("Bricks");
+		$BrickList = $this->db->get("bricks");
 		if($BrickList->num_rows()<=0) return false;
 		else return $BrickPack->result();
     }

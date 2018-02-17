@@ -1,4 +1,3 @@
-/// <reference path="../../../jquery.d.ts"/>
 class SideBar extends HTMLElement {
     /**
      * Simple Side Bar Widget with Title and Content

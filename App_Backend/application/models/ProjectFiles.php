@@ -32,7 +32,7 @@ class ProjectFiles extends CI_Model
             ->where("UID",$UID)
             ->where("PID",$PID)
             ->limit(1)
-            ->update("ProjectFiles");
+            ->update("projectfiles");
         return $ret->num_rows();
     }
 
@@ -48,7 +48,7 @@ class ProjectFiles extends CI_Model
         $this->db->where("HFID",$HFID);
         $this->db->where("UID",$UID);
         $this->db->where("PID",$PID);
-        $File = $this->db->get("ProjectFiles");
+        $File = $this->db->get("projectfiles");
 
         if($File->num_rows()<=0)   return "";
         else return $File->result()[0]->Content;
@@ -67,7 +67,7 @@ class ProjectFiles extends CI_Model
         $result = $this->db->where("FID",$FID)
                 ->where("PID",$PID)
                 ->where("UID",$UID)
-                ->delete("ProjectFiles");
+                ->delete("projectfiles");
         return $result;
     }
 
@@ -86,7 +86,7 @@ class ProjectFiles extends CI_Model
         $this->db->where("UID",$UID);
         $this->db->where("PID",$PID);
 		$this->db->limit(1);
-		$File = $this->db->get("ProjectFiles");
+		$File = $this->db->get("projectfiles");
 		if($File->num_rows()<1)return false;
 		else return true;
 	}
@@ -97,7 +97,7 @@ class ProjectFiles extends CI_Model
             ->where("PID",$PID)
             ->where("UID",$UID)
             ->limit(1)
-            ->get("ProjectFiles");
+            ->get("projectfiles");
 	    if ($Q->num_rows()>0){
 	        return $Q->result_array()[0]["NAME"];
         }
@@ -110,7 +110,7 @@ class ProjectFiles extends CI_Model
             ->where("PID",$PID)
             ->where("UID",$UID)
             ->limit(1)
-            ->get("ProjectFiles");
+            ->get("projectfiles");
         return ($Q->num_rows()>0);
     }
 
@@ -120,7 +120,7 @@ class ProjectFiles extends CI_Model
             ->where("FID",$FID)
             ->where("PID",$PID)
             ->where("UID",$UID)
-            ->update("ProjectFiles");
+            ->update("projectfiles");
 	     return $Q;
     }
 
@@ -140,7 +140,7 @@ class ProjectFiles extends CI_Model
         $this->db->where("PID",$PID);
         $this->db->where("TYPE",0);
 		$this->db->limit(1);
-		$File = $this->db->get("ProjectFiles");
+		$File = $this->db->get("projectfiles");
 		if($File->num_rows()<1)return false;
 		else return true;
 	}
@@ -155,7 +155,7 @@ class ProjectFiles extends CI_Model
      * @return mixed File ID
      */
     public function addEntry($Name,$Parent,$type,$PID,$UID){
-        $this->db->insert("ProjectFiles",[
+        $this->db->insert("projectfiles",[
             "NAME"=>$Name,
             "PARENT"=>$Parent,
             "PID"=>$PID,
@@ -172,11 +172,11 @@ class ProjectFiles extends CI_Model
      * @return mixed Array of ["ID","ME","PARENT","Name","TYPE","LAST_EDIT"]
      */
     public function getUserProjectFiles($PID,$UID){
-        // Get All Rows from "ProjectFiles" Table which match the IDs in the List $Bricks
+        // Get All Rows from "projectfiles" Table which match the IDs in the List $Bricks
 		$this->db->where("UID",$UID);
         $this->db->where("PID",$PID);
 		$this->db->select("FID AS id,PARENT as parent, NAME as text,TYPE as type");
-		$FileList = $this->db->get("ProjectFiles");
+		$FileList = $this->db->get("projectfiles");
 
 		if($FileList->num_rows()<=0) return false;
 		else {

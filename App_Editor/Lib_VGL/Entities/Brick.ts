@@ -39,8 +39,8 @@ namespace VGL.Entities{
          * @param val
          * @constructor
          */
-        public set Position (val:THREE.Vector3){
-            this.Mesh.position = val.clone();
+        public set Position(val: THREE.Vector3) {
+            this.Mesh.position.copy(val);
         }
 
         /**

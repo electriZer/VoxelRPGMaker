@@ -16,14 +16,15 @@ namespace VGL.Loaders{
         private ImageLoader : THREE.TextureLoader;
         private Bricks:BrickLoaderSetting;
         private TextureCache:{[k:string]:THREE.MeshLambertMaterial};
-        private ErrorBrick ;
-        public static ImagePath = "data/Texture/";
+        private ErrorBrick;
+        private ImagePath: string = "";
 
-        constructor(LoaderSetting:BrickLoaderSetting){
+        constructor(LoaderSetting: BrickLoaderSetting, DataURL: { ImagePath: string }) {
             this.TextureLoader = new THREE.CubeTextureLoader();
             this.ImageLoader = new THREE.TextureLoader();
-            this.TextureLoader.setPath(CubeMeshLoader.ImagePath);
-            this.ImageLoader.setPath(CubeMeshLoader.ImagePath);
+            this.ImagePath = DataURL.ImagePath;
+            this.TextureLoader.setPath(this.ImagePath);
+            this.ImageLoader.setPath(this.ImagePath);
 
             this.Bricks = LoaderSetting;
             // The Error Brick for fallback is just plain red
@@ -100,7 +101,7 @@ namespace VGL.Loaders{
                 if (!this.TextureCache.hasOwnProperty(TextureFiles[i])) {
                     this.TextureCache[TextureFiles[i]] = new THREE.MeshLambertMaterial({color:0xFF0000});
                     // Load Texture into Cache
-                    this.ImageLoader.load(CubeMeshLoader.ImagePath + TextureFiles[i],
+                    this.ImageLoader.load(this.ImagePath + TextureFiles[i],
                         ((_cache_class, _cache_name) => {
                             return (texture : THREE.Texture)=> {
                                 texture.mapping = THREE.CubeReflectionMapping;

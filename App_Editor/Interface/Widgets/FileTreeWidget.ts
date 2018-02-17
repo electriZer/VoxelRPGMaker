@@ -1,8 +1,3 @@
-/// <reference path="../../../jquery.d.ts"/>
-/// <reference path="../../../jquery.jstree.d.ts"/>
-/// <reference path="../../Editor.ts" />
-declare var vex: any;
-
 class FileTreeWidgetHandlers {
     /**
     * @description Folder Handler
@@ -21,9 +16,8 @@ class FileTreeWidgetHandlers {
     */
     public static "2" = function (id) {
         //TODO : Tab Manager to create new tab
-        var tab = $("x-tab-view");
+        var tab = $("x-tab-view").get(0);
         var editor = new VEditor(tab);
-        //editor.OnReady();
         console.log("Open Map File " + id);
     }
 }
