@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "amd",
+    "target": "es6",
+    "lib": [
+      "es6"
+    ],
+    "sourceMap": true,
+    "outFile": "../../www/js/VGL.js"
+    //"outFile": "C:/Users/G/GDrive/VoxelRPGMaker VS/www/js/VGL.js"
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "typeAcquisition": { "enable": true }
+}

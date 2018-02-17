@@ -1,0 +1,226 @@
+* {
+    margin: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -55px;
+    /* the bottom margin is the negative value of the footer's height */
+}
+
+.footer,
+.push {
+    height: 55px;
+    /* .push must be the same height as .footer */
+}
+
+.footer {
+    padding-top: 5px;
+    background: url("/images/pattern.png"), #000000;
+    color: rgba(230, 230, 230, 0.8);
+    text-align: center;
+    border-top: rgba(0, 0, 0, 0.8) 1px solid;
+}
+
+
+/*
+.header {
+    background: rgb(99, 131, 240);
+    background-image: url("/images/pattern.png");
+    background: url("/images/pattern.png"), -moz-linear-gradient(top, rgba(102, 166, 237,1) 0%, rgba(59, 96, 202, 1) 66%, rgba(73, 104, 212, 1) 100%);
+    background: url("/images/pattern.png"), -webkit-linear-gradient(top,rgba(102, 166, 237,1) 0%, rgba(59, 96, 202, 1) 66%, rgba(73, 104, 212, 1) 100%);
+    background: url("/images/pattern.png"), linear-gradient(to bottom, rgb(102, 166, 237) 0%, rgba(59, 96, 202, 1) 66%, rgb(73, 104, 212) 100%);
+    min-height: 75px;
+    padding-bottom: 5px;
+    border-bottom: rgba(0, 0, 0, 0.8) 3px solid;
+    background-clip: padding-box;
+}
+
+.header .title-text {
+    padding-top: 22px;
+    padding-left: 1%;
+    color: white;
+    font-family: 'Ek Mukta', sans-serif;
+    font-weight: 900;
+}
+
+.header .title-text div:first-child {
+    font-size: 35pt;
+    text-transform: uppercase;
+    text-align: right;
+    line-height: 25pt;
+}
+
+.header .title-text.pushleft div:first-child{
+    text-align: left !important;
+}
+
+.header .title-text span {
+    display: block;
+    font-size: 11pt;
+    text-align: right;
+}
+*/
+
+.header-container {
+    font-size: 14pt;
+}
+
+.header-container .help-block {
+    font-size: 12pt;
+    margin-top: 0px;
+}
+
+.header-container input {
+    width: 50%;
+    border: 1px grey solid;
+    padding: 2px;
+    outline: none !important;
+}
+
+.header-container input:focus {
+    border-color: #9999FF;
+}
+
+
+/* Form */
+
+.formStatus {
+    margin-top: 20px;
+    padding-left: 0px;
+    list-style-type: none;
+}
+
+.formStatus li:first-child {
+    border-top: 1px solid red;
+}
+
+.formStatus.success li:first-child {
+    border-top: 1px solid green;
+}
+
+input.has-error {
+    border-color: red !important;
+    border-style: solid !important;
+}
+
+input.has-warning {
+    border-color: #d59313 !important;
+    border-style: solid !important;
+}
+
+
+/* Project List */
+
+.ProjectsListContainer {
+    padding-top: 20px;
+    font-family: 'Ek Mukta', sans-serif;
+}
+
+.ProjectsListContainer div:first-child {
+    color: rgb(19, 132, 204);
+    font-weight: 900;
+    font-size: 19pt;
+}
+
+.ProjectsList {
+    margin-top: 20px;
+    margin-left: 5px;
+    list-style: none;
+    padding-left: 0px;
+}
+
+.ProjectsList li {
+    border-left: 5px solid rgb(230, 230, 230);
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    padding-left: 20px;
+    margin-top: 20px;
+}
+
+.ProjectsList li.selected {
+    border-top: 1px solid rgb(128, 128, 228);
+    border-bottom: 1px solid rgb(128, 128, 228);
+    border-left-color: rgb(145, 145, 245);
+    cursor: default;
+}
+
+ul.ProjectsList li:hover {
+    border-left-color: rgb(255, 120, 36);
+    background: -webkit-gradient(linear, 0 0, 100% 0, from(rgba(255, 220, 206, 0.25)), to(rgba(234, 234, 234, 0)));
+    background: -webkit-linear-gradient(left, rgba(255, 220, 206, 0.25) 0%, rgba(234, 234, 234, 0) 100%);
+    background: -moz-linear-gradient(left, rgba(255, 220, 206, 0.25) 0%, rgba(234, 234, 234, 0) 100%);
+    background: -o-linear-gradient(left, rgba(255, 220, 206, 0.25) 0%, rgba(234, 234, 234, 0) 100%);
+    background: linear-gradient(left, rgba(255, 220, 206, 0.25) 0%, rgba(234, 234, 234, 0) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#40ffdcce', endColorstr='#00eaeaea', GradientType=1);
+}
+
+.ProjectsList li.empty {
+    font-style: italic;
+    font-family: Serif;
+}
+
+
+.ProjectsList li.empty:hover {
+    border: none;
+    border-left: 1px solid #90C3D4;
+    cursor: default;
+}
+.ProjectsList div,
+.ProjectsList #ProjectName:hover,
+.ProjectsList #ProjectName:active,
+.ProjectsList #ProjectName:visited,
+.ProjectsList #ProjectName:focus {
+    text-decoration: none;
+    cursor: default;
+}
+
+.time {
+    font-size: 9pt;
+}
+
+.ProjectsList .description {
+    font-size: 11pt;
+    color: rgb(103, 103, 103);
+}
+
+
+/* ProjectOptions */
+
+.ProjectOptionsContainer {
+    padding-top: 20px;
+}
+
+#NewProjectContainer {
+    display: none;
+    padding-top: 20px;
+}
+
+#NewProjectContainer div {
+    padding-top: 2px;
+}
+
+.ProjectManagerNavbar {
+    background-image: url("/images/pattern.png");
+}
+
+.ProjectManagerNavbar a.navbar-brand {
+    color: rgb(99, 131, 240);
+}
+
+.ProjectManagerNavbar a.disabled:hover {
+    color: #777 !important;
+}
+
+.EasyBox {
+    border: 2px solid #CCC;
+    padding-left: 10px;
+}
+

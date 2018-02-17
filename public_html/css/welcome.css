@@ -1,0 +1,214 @@
+* {
+    margin: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -55px;
+    /* the bottom margin is the negative value of the footer's height */
+}
+
+.footer,
+.push {
+    height: 55px;
+    /* .push must be the same height as .footer */
+}
+
+.footer {
+    padding-top: 5px;
+    background: url("/images/pattern.png"), #000000;
+    color: rgba(230, 230, 230, 0.8);
+    text-align: center;
+    border-top: rgba(0, 0, 0, 0.8) 1px solid;
+}
+
+
+/* Welcome Header */
+
+.welcome-head {
+    background: rgb(90, 0, 255);
+    background-image: url("/images/pattern.png");
+    background: url("/images/pattern.png"), -moz-linear-gradient(top, rgba(90, 0, 255, 1) 0%, rgba(59, 96, 202, 1) 66%, rgba(91, 50, 171, 1) 100%);
+    background: url("/images/pattern.png"), -webkit-linear-gradient(top, rgba(90, 0, 255, 1) 0%, rgba(59, 96, 202, 1) 66%, rgba(91, 50, 171, 1) 100%);
+    background: url("/images/pattern.png"), linear-gradient(to bottom, rgba(90, 0, 255, 1) 0%, rgba(59, 96, 202, 1) 66%, rgba(91, 50, 171, 1) 100%);
+    /*height: 60%;*/
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5)
+}
+
+.welcome-head .title-text-container {
+    padding-top: 25%;
+    padding-left: 1%;
+    color: white;
+    font-family: 'Ek Mukta', sans-serif;
+    font-weight: 700;
+    cursor: default;
+}
+
+.welcome-head .title-text-container div:first-child {
+    font-size: 14vw;
+    text-transform: uppercase;
+    line-height: 11vw;
+    text-align: right;
+}
+
+.welcome-head .title-text-container div:last-child {
+    font-size: 3vw;
+    text-align: right;
+}
+
+.welcome-head .card {
+    margin-top: 25%;
+}
+
+.welcome-head .welcome-text-container {
+    padding-top: 25%;
+    padding-left: 1%;
+    color: white;
+    font-family: 'Ek Mukta', sans-serif;
+    font-weight: 700;
+    cursor: default;
+    font-size: 3vw;
+    text-align: right;
+}
+.welcome-head .welcome-text-container span{
+    color:rgb(190, 255, 0);
+    font-weight: 900;
+    font-size: 4vw;
+    text-align: left;
+}
+
+.welcome-head .btn-container{
+    padding-top: 15%;
+    text-align: right;
+    margin-left: 10%;
+}
+
+a.btn.btn-mngr {
+    font-size: 2vw;
+    color: white;
+    font-weight: 700;
+    border-radius: 5px;
+    background-color: rgba(3, 66, 140,0.3);
+    border: 3px solid rgba(0,0,0,0.0);
+    font-family: 'Ek Mukta', sans-serif;
+}
+
+a.btn.btn-mngr:hover {
+    background-color: rgba(54, 153, 251,0.1);
+    border: 3px solid rgba(0,0,0,0.3);
+}
+
+/* Registration Header */
+
+.registration-head {
+    background: rgb(90, 0, 255);
+    background-image: url("/images/pattern.png");
+    background: url("/images/pattern.png"), -moz-linear-gradient(top, rgba(90, 0, 255, 1) 0%, rgba(59, 96, 202, 1) 66%, rgba(91, 50, 171, 1) 100%);
+    background: url("/images/pattern.png"), -webkit-linear-gradient(top, rgba(90, 0, 255, 1) 0%, rgba(59, 96, 202, 1) 66%, rgba(91, 50, 171, 1) 100%);
+    background: url("/images/pattern.png"), linear-gradient(to bottom, rgba(90, 0, 255, 1) 0%, rgba(59, 96, 202, 1) 66%, rgba(91, 50, 171, 1) 100%);
+    min-height: 75px;
+    padding-bottom: 5px;
+    border-bottom: rgba(0, 0, 0, 0.8) 3px solid;
+    background-clip: padding-box;
+}
+
+.registration-head .title-text-container {
+    padding-top: 22px;
+    padding-left: 1%;
+    color: white;
+    font-family: 'Ek Mukta', sans-serif;
+    font-weight: 900;
+}
+
+.registration-head .title-text-container div:first-child {
+    font-size: 35pt;
+    text-transform: uppercase;
+    text-align: right;
+    line-height: 25pt;
+}
+
+.registration-head .title-text-container span {
+    display: block;
+    font-size: 11pt;
+    text-align: right;
+}
+
+.registration-container {
+    height: 100%;
+}
+
+.registration-container {
+    font-size: 14pt;
+}
+
+.registration-container .help-block {
+    font-size: 12pt;
+    margin-top: 0px;
+}
+
+.registration-container input {
+    width: 50%;
+    border: 1px grey solid;
+    padding: 2px;
+    outline: none !important;
+}
+
+.registration-container input:focus {
+    border-color: #9999FF;
+}
+
+/* Form */
+
+.formStatus {
+    margin-top: 20px;
+    padding-left: 0px;
+    list-style-type: none;
+}
+
+.formStatus li:first-child {
+    border-top: 1px solid red;
+}
+
+.formStatus.success li:first-child {
+    border-top: 1px solid green;
+}
+
+input.has-error {
+    border-color: red !important;
+    border-style: solid !important;
+}
+
+input.has-warning {
+    border-color: #d59313 !important;
+    border-style: solid !important;
+}
+
+/* Navigation Buttons */
+
+.btn-header-nav {
+    color: #fff;
+    background-color: #333;
+    border-color: #46b8da;
+    border-top: none;
+    border-radius: 0px 0px 5px 5px !important;
+}
+
+.btn-header-nav:hover {
+    color: #333;
+    background-color: rgb(245, 245, 245);
+}
+
+.btn-header-nav.focus,
+.btn-header-nav:focus {
+    color: #fff !important;
+    background-color: #0d1d2b;
+    border-color: rgb(38, 93, 109);
+}

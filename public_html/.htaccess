@@ -1,0 +1,12 @@
+RewriteEngine on
+
+RewriteBase /
+
+#RewriteRule ^EDITOR/(.*)$ ../EDITOR/$1 [QSA]
+
+RewriteCond $1 !^(index\.php|css|js|src|images|fonts|EDITOR|robots\.txt)|!
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond $1 !^(.*).html|!
+
+RewriteRule ^(.*)$ index.php/$1 [L,QSA]

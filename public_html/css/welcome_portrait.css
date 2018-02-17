@@ -1,0 +1,14 @@
+.welcome-head{
+    height: 20% !important;
+}
+
+.welcome-head .title-text-container {
+    padding-top: 10% !important;
+}
+.welcome-head .btn-container{
+    padding-top: 0% !important;
+    margin-left: 0% !important;
+}
+a.btn.btn-mngr{
+    font-size: 2vw;
+}
